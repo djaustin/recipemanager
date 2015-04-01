@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Workspace</title>
+  <title>MyRecipes</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "myRecipes", "/home", class: "navbar-brand", id: "logo" %>    
+    </div> <!-- Navbar header -->
+    
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-left">
+          <li><%= link_to "link1", "", class: "nav-item" %></li>
+          <li class="divider"></li>
+          <li><%= link_to "link2", "", class: "nav-item" %></li>
+          <li><%= link_to "link3", "", class: "nav-item"%></li>
+        </ul>
+      </div><!-- collapse navbar-collapse -->
+    </div><!--container-fluid -->
+  </div><!-- navbar navbar-default -->
 
+<div class="container text-center">
 <%= yield %>
-
+</div>
+<div class="footer container">
+  <p>&copy; MyRecipes 2015</p>
+</div>
 </body>
 </html>
