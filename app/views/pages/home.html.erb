@@ -1,4 +1,4 @@
-<div class="jumbotron">
+<div class="jumbotron text-center">
 		<h1>Welcome to myRecipes App</h1>
 		<h2>This is the website for the Ruby on Rails udemy course.</h2>
 		<%= link_to "Sign In", "", class: "btn btn-lg btn-primary" %>
@@ -9,12 +9,12 @@
 	<div class="col-xs-4">
 		<h3>View Recipes as Guest User</h3>
 		<p>Browse and view recipes as a guest. Sign up later!<p>
-		<%= link_to "View Recipes", "", class: "btn btn-small btn-warning" %>
+		<%= link_to "View Recipes", recipes_path, class: "btn btn-small btn-warning" %>
 	</div>
 	<div class="col-xs-4">
-		<h3>View Recipes as Guest User</h3>
-		<p>Browse and view recipes as a guest. Sign up later!<p>
-		<%= link_to "View Recipes", "", class: "btn btn-small btn-warning" %>
+		<h3>Add a New Recipe</h3>
+		<p>Add a new recipe and share it with the community!<p>
+		<%= link_to "New Recipe", new_recipe_path, class: "btn btn-small btn-warning" %>
 	</div>
 	<div class="col-xs-4">
 		<h3>View Recipes as Guest User</h3>

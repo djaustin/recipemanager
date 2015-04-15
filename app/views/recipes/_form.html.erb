@@ -1,0 +1,27 @@
+<%= render 'layouts/errors', obj: @recipe %>
+
+<div class="row">
+	<div class="col-md-8 col-md-offset-2 well">
+		<%= form_for @recipe do |f| %>
+			
+			<p>
+				<%= f.label :name %>
+				<%= f.text_field :name, class: "form-control" %>
+			</p>
+
+			<p>
+				<%= f.label :summary %>
+				<%= f.text_field :summary, class: "form-control" %>
+			</p>
+
+			<p>
+				<%= f.label :description %>
+				<%= f.text_area :description, class: "form-control", rows: 10 %>
+			</p>
+
+			<p class="text-center">
+				<%= f.submit @recipe.new_record? ? "Create Recipe" : "Save Recipe", class: "btn btn-success" %>
+			<p>
+		<% end %>
+	</div>
+</div>

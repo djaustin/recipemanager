@@ -1,0 +1,21 @@
+<%= render 'layouts/page_title', title: @recipe.name %>
+
+<div class="row">
+	<div class="col-md-8 wrap-break">
+		<h1><small><%= @recipe.summary %></small></h1>
+		<div class="well">
+			<p>
+				<strong>Steps:</strong> <br />
+				<%= @recipe.description %>
+			</p>
+		</div>
+	</div>
+	<div class="col-md-4 text-center">
+		<%= gravatar_for @recipe.chef, size: 200 %>
+		<p>By: <strong><%= link_to @recipe.chef.chefname, chef_path(@recipe.chef) %></strong></p>
+	</div>
+</div>
+
+<%= link_to "Return to Recipes Listing", recipes_path, class: "btn btn-warning btn-sm" %>
+<%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: "btn btn-primary btn-sm" %>
+
