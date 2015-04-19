@@ -6,13 +6,13 @@
 			<%= gravatar_for recipe.chef, size: 100 %> <br/>
 			<%= link_to recipe.chef.chefname, chef_path(recipe.chef) %>
 		</div>
-		<div class="col-xs-8 well well-sm wrap-break">
+		<div class="col-xs-6 well well-sm wrap-break">
 			<h4><%= link_to recipe.name, recipe_path(recipe) %></h4>
 			<h5><%= recipe.summary %></h5>
 			<p class="small"><%= time_ago_in_words(recipe.created_at) %> ago</p>
 		</div>
-		<div class="col-xs-2">
-			RECIPE IMAGE HERE
+		<div class="col-xs-4">
+			<%= image_tag(recipe.image.index, class: "gravatar") if recipe.image? %>
 		</div>
 	</div>
 	<hr />
