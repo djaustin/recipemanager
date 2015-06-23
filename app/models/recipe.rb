@@ -1,5 +1,7 @@
 class Recipe < ActiveRecord::Base
   belongs_to :chef
+  has_many :likes
+
   validates :name, presence: true, length: {minimum: 5, maximum: 100}
   validates :summary, presence: true, length: {minimum: 5, maximum: 150}
   validates :description, presence: true, length: {minimum: 20, maximum: 500}
@@ -7,6 +9,14 @@ class Recipe < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   validate :image_size
+
+  def like_count 
+    self.likes.where(like: true).size
+  end
+
+  def dislike_count
+    self.likes.where(like: false).size
+  end
 
   private 
   	def image_size 

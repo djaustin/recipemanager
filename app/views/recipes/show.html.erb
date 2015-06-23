@@ -9,6 +9,17 @@
 				<strong>Steps:</strong> <br />
 				<%= @recipe.description %>
 			</p>
+			<div class="pull-right likes-div">
+				<%= link_to like_recipe_path(@recipe, like: true), method: :post do %>
+				<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+				<% end %>
+				<%= @recipe.like_count %>
+				
+				<%= link_to like_recipe_path(@recipe, like: false), method: :post do %>
+				<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+				<% end %>
+				<%= @recipe.dislike_count %>
+			</div>
 		</div>
 	</div>
 	<div class="col-md-4 text-center">
