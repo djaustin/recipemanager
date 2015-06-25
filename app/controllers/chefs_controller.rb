@@ -1,6 +1,53 @@
 class ChefsController < ApplicationController
 
+	before_action :set_chef, only: [:show, :edit, :update]
+
+	def index
+		@chefs = Chef.paginate(page: params[:page], per_page: 3)
+	end	
+
 	def show
-		@chef = Chef.find(params[:id])
+		@recipes = @chef.recipes.paginate(page: params[:page], per_page: 3)
 	end
+
+	def new
+		@chef = Chef.new
+	end
+
+	def create 
+		@chef = Chef.new(chef_params)
+		if @chef.save 
+			flash[:success] = "Thank you, #{@chef.chefname}. You have been successfully registered."
+			session[:user_id] = @chef.id
+			redirect_to '/'
+		else 
+			render 'new'
+		end
+	end
+
+	def edit
+		unless current_user == @chef
+			flash[:danger] = "You may only change your own details"
+			redirect_to @chef
+		end
+	end
+
+	def update
+		if @chef.update(chef_params)
+			flash[:success] = "Your profile has been successfully changed"
+			redirect_to @chef
+		else
+			render 'edit'
+		end
+	end
+
+	private 
+	def chef_params
+		params.require(:chef).permit(:chefname, :email, :password, :password_confirmation)
+	end
+
+	def set_chef
+		@chef = Chef.find(params[:id])
+	end	
+
 end

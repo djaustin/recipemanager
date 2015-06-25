@@ -1,0 +1,34 @@
+<%= render 'layouts/errors', obj: @chef %>
+<% disabled ||= false %>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2 well">
+		<%= form_for @chef do |f| %>
+			
+			<p>
+				<%= f.label :chefname %>
+				<%= f.text_field :chefname, class: "form-control" %>
+			</p>
+
+			<p>
+				<%= f.label :email %>
+				<%= f.text_field :email, class: "form-control", disabled: disabled %>
+			</p>
+
+			<p>
+				<%= f.label :password %>
+				<%= f.password_field :password, class: "form-control" %>
+			</p>
+
+			<p>
+				<%= f.label :password_confirmation %>
+				<%= f.password_field :password_confirmation, class: "form-control" %>
+			</p>
+
+			<p class="text-center">
+
+				<%= link_to 'Cancel', chef_path(@chef), class: 'btn btn-danger' unless @chef.new_record? %> 
+				<%= f.submit @chef.new_record? ? "Register" : "Save Changes", class: "btn btn-success" %>
+			<p>
+		<% end %>
+	</div>
+</div>

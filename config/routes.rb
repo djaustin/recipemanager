@@ -1,16 +1,26 @@
 Rails.application.routes.draw do
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   root "pages#home"
   get "/home", to: 'pages#home'
   
-  resources :chefs
+  resources :chefs, except: [:new]
+  get '/register', to: 'chefs#new', as: 'new_chef'
+
   resources :recipes do
     member do 
       post 'like'
     end
   end
+
+  resources :sessions, except: [:new]
+
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

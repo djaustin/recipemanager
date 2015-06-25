@@ -1,1 +1,43 @@
-<h1><%= @chef.chefname %></h1>
+<%= render 'layouts/page_title', title: @chef.chefname %>
+<% if current_user == @chef %>
+	<%= link_to 'Edit Details', edit_chef_path(@chef), class: 'btn btn-primary btn-sm' %>
+<% end %>
+<div class="row text-center">
+	<%= gravatar_for(@chef, size: 200) %>
+</div>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2 text-center">
+		<h2>Recipes</h2>
+		<%= will_paginate @recipes%>
+	</div>
+</div>
+
+<% if @recipes.empty? %>
+	<p class="text-center">Nothing to show here yet :(</p>
+<% else %>
+	<% @recipes.each do |recipe| %>
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2 well well-sm wrap-break">
+				<h4><%= link_to recipe.name, recipe_path(recipe) %></h4>
+				<h5><%= recipe.summary %></h5>
+				<p class="small">
+					<% unless recipe.updated_at == recipe.created_at %>
+						Updated <%= time_ago_in_words(recipe.updated_at) %> ago<br />
+					<% end %>
+					Created <%= time_ago_in_words(recipe.created_at) %> ago
+				</p>
+				<div class="pull-right likes-div">
+					<%= link_to like_recipe_path(recipe, like: true), method: :post do %>
+					<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+					<% end %>
+					<%= recipe.like_count %>
+					
+					<%= link_to like_recipe_path(recipe, like: false), method: :post do %>
+					<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+					<% end %>
+					<%= recipe.dislike_count %>
+				</div>
+			</div>
+		</div>
+	<% end %>
+<% end %>

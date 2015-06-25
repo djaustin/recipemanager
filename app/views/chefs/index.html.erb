@@ -1,0 +1,20 @@
+<%= render 'layouts/page_title', title: 'Registered Chefs' %>
+<ul class="nav nav-tabs">
+  <li role="presentation"><%= link_to 'Recipes', recipes_path %></li>
+  <li role="presentation" class="active"><a href="#">Chefs</a></li>
+</ul>
+<div class="text-center">
+	<%= will_paginate @chefs %>
+</div>
+
+<% @chefs.each do |chef| %>
+	<div class="row text-center">
+			<%= link_to gravatar_for(chef, size: 150), chef_path(chef) %>
+			<p>
+				<%= link_to chef.chefname, chef_path(chef) %> <br />
+				<span class="small"><%= pluralize(chef.recipes.size, "recipes") %></span>
+			</p>
+
+<% end %>
+
+<%= will_paginate @chefs %>
