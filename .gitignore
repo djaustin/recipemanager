@@ -17,3 +17,4 @@
 
 # Ignore c9 hidden files
 .c9/
+/config/app_environment_variables.rb
