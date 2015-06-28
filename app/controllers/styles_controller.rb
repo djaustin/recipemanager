@@ -1,6 +1,7 @@
 class StylesController < ApplicationController
   
   before_action :set_style, only: [:show, :edit, :update]
+  before_action :authorise, only: [:new, :create, :update, :edit]
 
   def index
     @styles = Style.paginate(page: params[:page], per_page: 3)

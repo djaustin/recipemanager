@@ -1,0 +1,16 @@
+<%= render 'layouts/errors', obj: @style %>
+
+<div class="row">
+	<div class="col-md-8 col-md-offset-2 well">
+		<%= form_for @style do |f| %>
+			<p>
+				<%= f.label :name %>
+				<%= f.text_field :name, class: "form-control" %>
+			</p>
+
+			<p class="text-center">
+				<%= f.submit @style.new_record? ? "Add Style" : "Save Changes", class: 'btn btn-success' %>
+			</p>
+		<% end %>
+	</div>
+</div>

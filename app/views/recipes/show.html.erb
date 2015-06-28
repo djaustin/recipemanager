@@ -4,17 +4,13 @@
 	<div class="col-md-8 wrap-break">
 		<h1><small><%= @recipe.summary %></small></h1>
 		<p>
-			<strong>Contains:</strong>
-			<% @recipe.ingredients.each do |ingredient| %>
-				<%= link_to ingredient.name, ingredient_path(ingredient) %>
-			<% end %>
+			Contains:
+			<%= render @recipe.ingredients %>
 		</p>
 
 		<p>
-			<strong>Styles:</strong>
-			<% @recipe.styles.each do |style| %>
-				<%= link_to style.name, style_path(style) %>
-			<% end %>
+			Styles:
+			<%= render @recipe.styles %>
 		</p>
 		<%= image_tag(@recipe.image.url, class: "gravatar") if @recipe.image?%>
 		<div class="well">

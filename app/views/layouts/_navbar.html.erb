@@ -22,10 +22,16 @@
             Styles <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
+              <li><%= link_to 'All', recipes_path %>
+              <li class="divider"></li>
               <% Style.all.each do |style| %>
                 <li>
                   <%= link_to style.name.capitalize, style_path(style) %>
                 </li>
+              <% end %>
+              <% if current_user %>
+                <li class="divider"></li>
+                <li><%= link_to 'New Style', new_style_path %>
               <% end %>
             </ul>
           </div>
@@ -38,10 +44,16 @@
             Ingredients <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
+              <li><%= link_to 'All', recipes_path %></li>
+              <li class="divider"></li>
               <% Ingredient.all.each do |ingredient| %>
                 <li>
                   <%= link_to ingredient.name.capitalize, ingredient_path(ingredient) %>
                 </li>
+              <% end %>
+              <% if current_user %>
+                <li class="divider"></li>
+                <li><%= link_to 'New Ingredient', new_ingredient_path %>
               <% end %>
             </ul>
           </div>
