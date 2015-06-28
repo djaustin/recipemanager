@@ -1,0 +1,38 @@
+<%= render 'layouts/page_title', title: "Containing #{@ingredient.name.capitalize}" %>
+
+<%= will_paginate @recipes %>
+
+<% @recipes.each do |recipe| %>
+	<div class="row">
+		<div class="col-xs-2 text-center">
+			<%= link_to gravatar_for(recipe.chef, size: 100), chef_path(recipe.chef) %> <br/>
+			<%= link_to recipe.chef.chefname, chef_path(recipe.chef) %>
+		</div>
+		<div class="col-xs-6 well well-sm wrap-break">
+			<h4><%= link_to recipe.name, recipe_path(recipe) %></h4>
+			<h5><%= recipe.summary %></h5>
+			<p class="small">
+				<% unless recipe.updated_at == recipe.created_at %>
+					Updated <%= time_ago_in_words(recipe.updated_at) %> ago<br />
+				<% end %>
+				Created <%= time_ago_in_words(recipe.created_at) %> ago
+			</p>
+			<div class="pull-right likes-div">
+				<%= link_to like_recipe_path(recipe, like: true), method: :post do %>
+				<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+				<% end %>
+				<%= recipe.like_count %>
+				
+				<%= link_to like_recipe_path(recipe, like: false), method: :post do %>
+				<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+				<% end %>
+				<%= recipe.dislike_count %>
+			</div>
+		</div>
+		<div class="col-xs-4">
+			<%= image_tag(recipe.image.index, class: "gravatar") if recipe.image? %>
+		</div>
+	</div>
+	<hr />
+
+<% end %>

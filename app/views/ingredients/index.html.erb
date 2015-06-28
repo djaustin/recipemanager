@@ -1,0 +1,7 @@
+<%= render 'layouts/page_title', title: 'Ingredients' %> 
+
+<%= will_paginate %>
+
+<% @ingredients.each do |ingredient| %>
+	<%= link_to ingredient.name, @ingredient %>
+<% end %>

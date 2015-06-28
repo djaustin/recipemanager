@@ -1,0 +1,19 @@
+<%= render 'layouts/errors', obj: @ingredient %>
+
+<div class="row">
+	<div class="col-md-8 col-md-offset-2 well">
+
+		<%= form_for @ingredient do |f| %>
+
+			<p>
+				<%= f.label :name %>
+				<%= f.text_field :name, class: "form-control" %>
+			</p>
+
+			<p class="text-center">
+				<%= f.submit @ingredient.new_record? ? "Add Ingredient" : "Save Changes", class: "btn btn-success" %>
+			</p>
+		<% end %>
+
+	</div>
+</div>

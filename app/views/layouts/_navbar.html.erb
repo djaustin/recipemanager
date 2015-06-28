@@ -15,6 +15,38 @@
         <li><%= link_to "Recipes", recipes_path, class: "nav-item" %></li>
         <li class="divider"></li>
         <li><%= link_to "Chefs", chefs_path, class: "nav-item" %></li>
+        <!-- Styles dropdown menu -->
+        <li>
+          <div class="btn-group">
+            <button type="button" class="nav-offset btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Styles <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <% Style.all.each do |style| %>
+                <li>
+                  <%= link_to style.name.capitalize, style_path(style) %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </li> <!-- Styles dropdown menu -->
+
+        <!-- Ingredients dropdown menu -->
+        <li>
+          <div class="btn-group">
+            <button type="button" class="nav-offset btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Ingredients <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <% Ingredient.all.each do |ingredient| %>
+                <li>
+                  <%= link_to ingredient.name.capitalize, ingredient_path(ingredient) %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </li> <!-- Ingredients dropdown menu -->
+
         <% if current_user %>
           <li><%= link_to "New Recipe", new_recipe_path, class: "nav-item"%></li>
         <% end %>

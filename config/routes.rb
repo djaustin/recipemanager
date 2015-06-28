@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :styles, :ingredients
+
   resources :sessions, except: [:new]
 
   get '/login' => 'sessions#new'
