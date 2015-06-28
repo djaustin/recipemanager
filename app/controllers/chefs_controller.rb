@@ -1,6 +1,7 @@
 class ChefsController < ApplicationController
 
 	before_action :set_chef, only: [:show, :edit, :update]
+	before_action :valid_user?, only: [:edit, :update]
 
 	def index
 		@chefs = Chef.paginate(page: params[:page], per_page: 3)
@@ -26,10 +27,6 @@ class ChefsController < ApplicationController
 	end
 
 	def edit
-		unless current_user == @chef
-			flash[:danger] = "You may only change your own details"
-			redirect_to @chef
-		end
 	end
 
 	def update
@@ -49,5 +46,12 @@ class ChefsController < ApplicationController
 	def set_chef
 		@chef = Chef.find(params[:id])
 	end	
+
+	def valid_user?
+		unless (current_user == @chef) || admin?
+			flash[:danger] = "You must be logged in as the correct user to edit"
+			redirect_to @chef
+		end
+	end
 
 end

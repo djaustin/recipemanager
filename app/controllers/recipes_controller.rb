@@ -2,6 +2,8 @@ class RecipesController < ApplicationController
 
 	before_action :set_recipe, only: [:show, :edit, :update]
 	before_action :authorise, only: [:create, :edit, :update, :new]
+	before_action :valid_user?, only: [:edit, :update]
+	before_action :admin_user, only: :destroy
 
 	def index
 		#@recipes = Recipe.all.sort_by{|recipe| recipe.like_count}.reverse
@@ -16,11 +18,7 @@ class RecipesController < ApplicationController
 	end
 
 	def edit
-		unless current_user == @recipe.chef
-			flash[:danger] = "You may only edit recipes that you have created."
-			redirect_to @recipe
-		end
-
+		
 	end
 
 	def create 
@@ -55,6 +53,11 @@ class RecipesController < ApplicationController
 		redirect_to :back
 	end
 
+	def destroy
+		Recipe.find(params[:id]).destroy
+		redirect_to recipes_path
+	end
+
 	private
 		def recipe_params
 			params.require(:recipe).permit(:name, :summary, :description, :image, style_ids: [], ingredient_ids: [])
@@ -62,6 +65,17 @@ class RecipesController < ApplicationController
 
 		def set_recipe
 			@recipe = Recipe.find(params[:id])
+		end
+
+		def valid_user?
+			unless (current_user == @recipe.chef) || admin?
+				flash[:danger] = "You must be logged in as the correct user to edit this recipe"
+				redirect_to @recipe
+			end
+		end
+
+		def admin_user
+			redirect_to recipe_path unless admin?
 		end
 
 		def add_styles

@@ -1,5 +1,5 @@
 <%= render 'layouts/page_title', title: @chef.chefname %>
-<% if current_user == @chef %>
+<% if (current_user == @chef) || admin? %>
 	<%= link_to 'Edit Details', edit_chef_path(@chef), class: 'btn btn-primary btn-sm' %>
 <% end %>
 <div class="row text-center">

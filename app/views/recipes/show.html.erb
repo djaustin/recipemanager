@@ -1,5 +1,7 @@
 <%= render 'layouts/page_title', title: @recipe.name %>
-
+<% if admin? %>
+	<%= link_to 'DESTROY RECIPE', @recipe, method: :delete, data: {confirm: "Are you sure?"} %>
+<% end %>
 <div class="row">
 	<div class="col-md-8 wrap-break">
 		<h1><small><%= @recipe.summary %></small></h1>
@@ -44,6 +46,6 @@
 </div>
 
 <%= link_to "Return to Recipes Listing", recipes_path, class: "btn btn-warning btn-sm" %>
-<% if @recipe.chef == current_user %>
+<% if admin? || (@recipe.chef == current_user) %>
 <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: "btn btn-primary btn-sm" %>
 <% end %>
